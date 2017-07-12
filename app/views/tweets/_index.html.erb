@@ -1,0 +1,51 @@
+<div class="jumbotron">
+  <div class="container">
+  <h1>Welcome to Ling's Copycat Twitter!</h1>
+  </div>
+</div>
+
+<div class="container">
+<div class="row">
+  <div class="col-md-8">
+    <div class="">
+    <h3 style="text-align: center">Here are what others have twitted recently: </h3>
+    </div>
+    <% @tweets_today.each do |tweet| %>
+      <div class="row">
+        <div class="panel panel-success">
+          <div class="panel-heading">
+            <h3 class="panel-title">@<%= tweet.user.username %> said: (<%=tweet.created_at %>)</h3>
+          </div>
+          <div class="panel-body">
+           <%= tweet.message.html_safe %> 
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+  <div class="col-md-2">
+   
+  </div>
+
+  <div class="col-md-2">
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        <h3 class="panel-title">Already an user?</h3>
+      </div>
+      <div class="panel-body">
+        <%= link_to 'Sign In', user_session_path %>
+      </div>
+    </div>
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        <h3 class="panel-title">New to this site? </h3>
+      </div>
+      <div class="panel-body">
+        <%= link_to 'Sign Up', new_user_registration_path %>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+

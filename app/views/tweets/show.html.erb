@@ -1,0 +1,13 @@
+<div class="container">
+<p>
+  <strong>Message:</strong>
+  <%= @tweet.message.html_safe %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= link_to @tweet.user.username, show_user_path(id: @tweet.user.id) %>
+</p>
+
+<%= link_to 'Back', root_path %>
+</div>

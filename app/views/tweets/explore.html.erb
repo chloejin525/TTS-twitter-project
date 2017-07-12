@@ -1,0 +1,49 @@
+<div class="jumbotron">
+  <div class="container">
+  <h1>Welcome to Ling's Copycat Twitter!</h1>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-3">
+      <div class="panel panel-primary">
+        <div class="panel-heading">
+          <%= current_user.name %>
+        </div>
+        <div class="panel-body">
+          <p>Username: <%= current_user.username %> </p>
+          <p>Location: <%= current_user.location %> </p>
+          <p>Bio: <%= current_user.bio %> </p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-9">
+    <div class="">
+      <h3 style="text-align: center">Here are what others have twitted recently: </h3>
+    </div>
+    <% @tweets.each do |tweet| %>
+      <div class="row">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">@<%= tweet.user.username %> 
+                <% if current_user.following.include?(tweet.user.id) %>
+                    <%= link_to "Unfollow", unfollow_path(id: tweet.user.id), class: "btn btn-danger" %>
+                <% else %>
+                    <% if current_user.id != tweet.user.id %>
+                  <%= link_to "Follow", now_following_path(id: tweet.user.id), class: "btn btn-primary" %>
+              <% end %>
+                <% end %>
+            said: (<%=tweet.created_at %>)</h3>
+          </div>
+          <div class="panel-body">
+            <%= tweet.message.html_safe %> 
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+
+

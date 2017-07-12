@@ -1,0 +1,5 @@
+<% if !current_user %>
+	<%= render "index" %>
+<% else %>
+	<%= render 'epiccenter/feed' %>
+<% end %>
