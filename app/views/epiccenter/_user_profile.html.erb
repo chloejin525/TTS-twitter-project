@@ -1,0 +1,21 @@
+<div class="panel panel-primary">
+  <div class="panel-heading">
+    @<%= current_user.username %>
+  </div>
+  <div class="panel-body">
+	  <div class="row user-profile">
+      <%= image_tag current_user.avatar.url, size:50%>
+    </div>
+    <div class="row user-profile">
+	  		<%= current_user.username %>, <%= current_user.location %>
+	  </div>
+
+  <div class="row user-profile">
+  	Following: <%= current_user.following.count %> | Followers: <%= followed_by(current_user) %>
+  </div>
+
+  <div class="row user-profile">
+    <%= link_to "Edit Profile", edit_user_registration_path, class: "link" %>
+  </div>
+  </div>
+</div>

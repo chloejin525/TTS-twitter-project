@@ -6,8 +6,8 @@
 
 <p>
   <strong>User:</strong>
-  <%= link_to @tweet.user.username, show_user_path(id: @tweet.user.id) %>
+  <%= link_to @tweet.user.username, show_user_path(id: @tweet.user.id), class: "link" %>
 </p>
 
-<%= link_to 'Back', root_path %>
+<%= link_to 'Back', root_path, class: "link" %>
 </div>

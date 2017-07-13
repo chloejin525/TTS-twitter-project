@@ -7,6 +7,8 @@ Rails.application.routes.draw do
   get 'unfollow' => 'epiccenter#unfollow'
   get 'feed' => 'epiccenter#feed'
   get 'explore' => 'tweets#explore'
+  get 'hot_users' => 'epiccenter#hot_users'
+  get 'hot_tags' => 'epiccenter#hot_tags'
 
   resources :tweets
   devise_for :users

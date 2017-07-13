@@ -8,13 +8,22 @@
   <!-- a place for current user stats -->
   <div>
     <% @tag.tweets.order(created_at: :desc).each do |tweet| %>
-      <p> 
+      <div class="panel panel-default">
+        <div class="panel-heading"> 
   	    <%= "@#{tweet.user.username}" %>
-  	    • <%= time_ago_in_words(tweet.created_at) %>
-      </p>
-    	<p>
+          <% if current_user.following.include?(tweet.user.id) %>
+              <%= link_to "Unfollow", unfollow_path(id: tweet.user.id), class: "btn btn-danger", style: "color: #fff" %>
+          <% else %>
+              <% if current_user.id != tweet.user.id %>
+            <%= link_to "Follow", now_following_path(id: tweet.user.id), class: "btn btn-primary", style: "color: #fff" %>
+              <% end %>
+          <% end %>
+  	    • <%= time_ago_in_words(tweet.created_at) %> ago
+        </div>
+    	<div class="panel-body">
     	    <%= tweet.message.html_safe %>
-    	</p>
+    	</div>
+      </div>
     <% end %>
    </div>
 </div>

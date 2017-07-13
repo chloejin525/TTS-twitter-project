@@ -1,7 +1,15 @@
 class EpiccenterController < ApplicationController
   
+  include ApplicationHelper
+
   #can also use only: [:action_name]	
   before_action :authenticate_user!
+
+  def hot_users
+  end
+
+  def hot_tags
+  end
 
   def tweet_tags
     @tag = Tag.find(params[:id])
@@ -21,6 +29,7 @@ class EpiccenterController < ApplicationController
 
   def show_user
   	@user = User.find(params[:id])
+    @followed_by_number = followed_by(@user)
   end
 
   def now_following

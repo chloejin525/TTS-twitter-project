@@ -1,26 +1,51 @@
 <div class="container">
-<h1>@<%= @user.username %>'s Profile and Tweets</h1>
-
-<p><%= @user.name %></p>
-<p><%= @user.location %></p>
-<p><%= @user.bio %></p>
-
-<p>
-    <% if current_user.following.include?(@user.id) %>
-        <%= link_to "Unfollow", unfollow_path(id: @user.id), class: "btn btn-danger" %>
-    <% else %>
-        <% if current_user.id != @user.id %>
-	    	<% if current_user.id != @user.id %>
-    			<%= link_to "Follow", now_following_path(id: @user.id), class: "btn btn-primary" %>
-			<% end %>
-	<% end %>
-    <% end %>
-</p>
-
-<% @user.tweets.each do |tweet| %>
-    <div>
-        <p>@<%= @user.username %></p>
-	<p><%= tweet.message %></p>
+<div class="row">
+<div class="col-md-8">
+    <div class="panel panel-default">
+          <div class="panel-heading">
+            <h1>
+                @<%= @user.username %>'s Profile and Tweets 
+                    <% if current_user.following.include?(@user.id) %>
+                        <%= link_to "Unfollow", unfollow_path(id: @user.id), class: "btn btn-danger", style: "color: #fff" %>
+                    <% else %>
+                        <% if current_user.id != @user.id %>
+                            <% if current_user.id != @user.id %>
+                                <%= link_to "Follow", now_following_path(id: @user.id), class: "btn btn-primary", style: "color: #fff" %>
+                            <% end %>
+                    <% end %>
+                    <% end %>
+            </h1>
+          </div>
+          <div class="panel-body">
+          <div class="col-md-3">
+            <%= image_tag @user.avatar.url, size:150 %>
+          </div>
+          <div class="col-md-9">
+            <p>Name: <%= @user.name %></p>
+            <p>Location: <%= @user.location %></p>
+            <p>Bio: <%= @user.bio %></p>
+            <p>Following: <%= @user.following.count %></p>
+            <p>Followed by: <%= @followed_by_number %></p>
+          </div>
+          </div>
     </div>
-<% end %>
+
+    <% @user.tweets.each do |tweet| %>
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            @<%= @user.username %>
+          </div>
+    	  <div class="panel-body">
+           <%= tweet.message.html_safe %></p>
+          </div>
+          </div>
+    <% end %>
+</div>
+    <div class="col-md-1">
+    </div>
+
+    <div class="col-md-3">
+      <%= render "epiccenter/user_profile.html.erb" %>
+    </div>
+</div>
 </div>
