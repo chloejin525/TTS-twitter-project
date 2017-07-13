@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
   
+  get 'following' => 'epiccenter#following'
+  get 'followers' => 'epiccenter#followers'
+  get 'all_users' => 'epiccenter#all_users'
   get 'tweet_tags' => 'epiccenter#tweet_tags'
   get 'home' => 'tweets#home'
   get 'show_user' => 'epiccenter#show_user'

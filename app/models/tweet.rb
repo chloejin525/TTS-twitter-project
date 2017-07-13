@@ -13,36 +13,35 @@ class Tweet < ApplicationRecord
 	private 
 
 	def link_check
-      check = false
-      if self.message.include? "http://" 
-         check = true
-      elsif self.message.include? "https://"
-         check = true
-      else
-         check = false
-      end	
-    
-      if check == true
+    check = false
+    if self.message.include? "http://" 
+       check = true
+    elsif self.message.include? "https://"
+       check = true
+    else
+       check = false
+    end	
+
+    if check == true
     	arr = self.message.split
     	index = arr.map{ |x| x.include? "http"}.index(true)
-        self.link = arr[index]
-        if arr[index].length > 23
-    	    arr[index] = "#{arr[index][0..20]}..."	
-        end
-    				
-        self.message = arr.join(" ")
+      self.link = arr[index]
+      if arr[index].length > 23
+  	    arr[index] = "#{arr[index][0..20]}..."	
       end
-     end	
+      self.message = arr.join(" ")
+    end
+  end	
 
-     def apply_link
-       arr = self.message.split
-	   index = arr.map{ |x| x.include?("http://") || x.include?("https://") }.index(true)
+  def apply_link
+    arr = self.message.split
+	  index = arr.map{ |x| x.include?("http://") || x.include?("https://") }.index(true)
 
-	   if index
+	  if index
 	   	url = arr[index]
 	   	arr[index] = "<a href='#{self.link}' target='_blank'>#{url}</a>"
-	   end
+	  end
 
-	   self.message = arr.join(" ")
-     end
+	  self.message = arr.join(" ")
+  end
 end

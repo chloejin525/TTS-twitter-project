@@ -6,12 +6,14 @@ class TweetsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :home]
 
   def home
+    @tweet = Tweet.new
+    
     @tweets = Tweet.all
 
     if @tweets.length < 5 
       @tweets_today = @tweets.sample(@tweets.length)
     else 
-      @tweets_today = @tweets.sample(5)
+      @tweets_today = @tweets.sort_by(&:created_at).reverse!.take(5)
     end
 
     @following_tweets = [ ]
@@ -31,10 +33,12 @@ class TweetsController < ApplicationController
   end
 
   def explore
-    if Tweet.all.length < 5 
-      @tweets = Tweet.all.sample(Tweet.all.length)
+    @tweets = Tweet.all
+
+    if @tweets.length < 5 
+      @tweets_today = @tweets.sample(@tweets.length)
     else 
-      @tweets = Tweet.all.sample(5)
+      @tweets_today = @tweets.sort_by(&:created_at).reverse!.take(5)
     end
   end
 

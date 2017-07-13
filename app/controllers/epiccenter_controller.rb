@@ -11,6 +11,11 @@ class EpiccenterController < ApplicationController
   def hot_tags
   end
 
+  def all_users
+    @users=User.order(:name)
+    
+  end
+
   def tweet_tags
     @tag = Tag.find(params[:id])
   end
@@ -30,6 +35,29 @@ class EpiccenterController < ApplicationController
   def show_user
   	@user = User.find(params[:id])
     @followed_by_number = followed_by(@user)
+  end
+
+  def following
+     @user = User.find(params[:id])
+     @users = []
+
+     User.all.each do |user|
+       if @user.following.include?(user.id)
+         @users.push(user)
+       end
+     end
+  end
+
+  def followers
+    @user =  User.find(params[:id])
+    @users = []
+
+    User.all.each do |user|
+      if user.following.include?(@user.id)
+        @users.push(user)
+      end
+    end
+
   end
 
   def now_following

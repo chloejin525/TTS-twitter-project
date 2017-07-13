@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Ling's CopyCat Twitter</title>
+    <title>CopyCat Twitter</title>
     <%= csrf_meta_tags %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
@@ -33,6 +33,7 @@
               </ul>
             </li>
             <li><%= link_to "Compose New Tweet", new_tweet_path %></li>
+            <li><%= link_to "All Users", all_users_path %></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
             <% if user_signed_in? %>
@@ -53,7 +54,10 @@
       </div>
     </nav>
 
+    
+
     <%= yield %>
+    
 
     <div class="footer" style= "background-color: #000">
       <div class="container">
