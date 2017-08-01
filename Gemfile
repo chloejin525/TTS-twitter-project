@@ -5,8 +5,10 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
-gem 'devise'
+#https://github.com/kossnocorp/jquery.turbolinks
+#gem 'jquery-turbolinks'
 
+gem 'devise'
 gem 'carrierwave'
 gem 'paperclip'
 gem 'bootstrap-sass'
